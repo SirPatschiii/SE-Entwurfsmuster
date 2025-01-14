@@ -1,0 +1,17 @@
+Brüh-Service:
+BrewStartEvent
+BrewCompletedEvent
+
+Vorratsmanagement:
+in BrewCompletedEvent
+SupplyStatusEvent
+
+Reinigungsservice:
+StartCleaningEvent
+CleaningRequiredEvent
+CleaningCompletedEvent
+
+Benutzerfassade Methoden:
+brewCoffee(BrewConfig config)
+checkSupplyStatus()
+startCleaning()
