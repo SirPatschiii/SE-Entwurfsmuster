@@ -1,11 +1,15 @@
 package chainOfResponsibility11;
 
-// Concrete handler for manager approval
-class ManagerApprovalHandler extends FlightChangeHandler {
+public class ManagerApprovalHandler extends FlightRequestHandler {
     @Override
-    protected boolean process(FlightChangeRequest request) {
-        System.out.println("Requesting manager approval...");
-        request.setManagerApproved(true); // Mark manager approval as granted
-        return true; // Continue the chain
+    protected boolean canHandle(Flight flight) {
+        // Simulate manager approval condition
+        return "Pending Approval".equals(flight.getStatus());
+    }
+
+    @Override
+    protected void process(Flight flight) {
+        System.out.println("ManagerApprovalHandler: Flight " + flight.getFlightId() + " approved by manager.");
+        flight.setStatus("Approved");
     }
 }

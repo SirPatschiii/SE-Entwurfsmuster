@@ -1,11 +1,14 @@
 package chainOfResponsibility11;
 
-// Concrete handler for checking resource availability
-public class ResourceCheckHandler extends FlightChangeHandler {
+class ResourceCheckHandler extends FlightRequestHandler {
     @Override
-    protected boolean process(FlightChangeRequest request) {
-        System.out.println("Checking resources...");
-        request.setResourcesChecked(true); // Mark resources as checked
-        return true; // Continue the chain
+    protected boolean canHandle(Flight flight) {
+        // Simulate resource availability check
+        return true; // Always passes for simplicity
+    }
+
+    @Override
+    protected void process(Flight flight) {
+        System.out.println("ResourceCheckHandler: Resources are available for flight " + flight.getFlightId() + ".");
     }
 }
