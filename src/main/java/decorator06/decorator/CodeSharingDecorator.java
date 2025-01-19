@@ -1,4 +1,6 @@
-package decorator06;
+package decorator06.decorator;
+
+import decorator06.flightPlan.FlightPlan;
 
 /**
  * A concrete decorator that adds code-sharing functionality to a flight plan.

@@ -1,4 +1,4 @@
-package decorator06;
+package decorator06.flightPlan;
 
 /**
  * Abstract base class for flight plans.

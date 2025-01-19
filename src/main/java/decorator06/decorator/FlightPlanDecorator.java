@@ -1,5 +1,6 @@
-package decorator06;
+package decorator06.decorator;
 
+import decorator06.flightPlan.FlightPlan;
 import lombok.RequiredArgsConstructor;
 
 /**

@@ -1,4 +1,4 @@
-package decorator06;
+package decorator06.flightPlan;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
