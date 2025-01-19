@@ -3,6 +3,7 @@ package decorator06;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
+@SuppressWarnings("SpellCheckingInspection")
 public class Application {
     public static void main(String[] args) {
         FlightPlan basicFlightPlan = new BasicFlightPlan("EDDM - EDDF");
