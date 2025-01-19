@@ -1,7 +1,5 @@
 package builder02;
 
-import factory01.EPlaneType;
-import factory01.FlightSchedule;
 import lombok.Getter;
 import lombok.ToString;
 
