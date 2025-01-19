@@ -1,17 +1,34 @@
 package mediator14;
 
-// Maintenance module
+import lombok.extern.slf4j.Slf4j;
+
+/**
+ * A concrete component that represents the maintenance department.
+ * <p>
+ * This class is part of the Mediator design pattern and communicates with other
+ * components via the mediator.
+ * </p>
+ */
+@Slf4j
+@SuppressWarnings("all")
 public class Maintenance extends Component {
-    public Maintenance(Mediator mediator) {
+    /**
+     * Constructs a Maintenance component with the given mediator.
+     *
+     * @param mediator the mediator for communication
+     */
+    public Maintenance(IMediator mediator) {
         super(mediator);
     }
 
-    public void performMaintenance(Flight flight) {
-        System.out.println("Maintenance: Performing maintenance on flight " + flight.getFlightId());
+    @Override
+    public void sendEvent(String event) {
+        this.event = event;
+        mediator.notify("Event from Maintenance", this);
     }
 
-    public void completeMaintenance(Flight flight) {
-        System.out.println("Maintenance: Maintenance completed for flight " + flight.getFlightId());
-        mediator.notify(this, "MaintenanceCompleted");
+    @Override
+    public void receiveEvent(String event) {
+        log.info("Maintenance received: {}", event);
     }
 }

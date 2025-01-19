@@ -1,17 +1,34 @@
 package mediator14;
 
-// CrewManagement module
- public class CrewManagement extends Component {
-    public CrewManagement(Mediator mediator) {
+import lombok.extern.slf4j.Slf4j;
+
+/**
+ * A concrete component that represents the crew management department.
+ * <p>
+ * This class is part of the Mediator design pattern and communicates with other
+ * components via the mediator.
+ * </p>
+ */
+@Slf4j
+@SuppressWarnings("all")
+public class CrewManagement extends Component {
+    /**
+     * Constructs a CrewManagement component with the given mediator.
+     *
+     * @param mediator the mediator for communication
+     */
+    public CrewManagement(IMediator mediator) {
         super(mediator);
     }
 
-    public void assignCrew(Flight flight) {
-        System.out.println("CrewManagement: Assigning crew for flight " + flight.getFlightId());
+    @Override
+    public void sendEvent(String event) {
+        this.event = event;
+        mediator.notify("Event from CrewManagement", this);
     }
 
-    public void releaseCrew(Flight flight) {
-        System.out.println("CrewManagement: Releasing crew for flight " + flight.getFlightId());
+    @Override
+    public void receiveEvent(String event) {
+        log.info("CrewManagement received: {}", event);
     }
 }
-
