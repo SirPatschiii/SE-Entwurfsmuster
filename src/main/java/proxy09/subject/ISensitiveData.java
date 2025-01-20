@@ -1,4 +1,4 @@
-package proxy09;
+package proxy09.subject;
 
 // Abstract class representing sensitive data access
 public interface ISensitiveData {

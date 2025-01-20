@@ -1,6 +1,9 @@
-package proxy09;
+package proxy09.proxy;
 
 import lombok.AllArgsConstructor;
+import proxy09.subject.EUserRole;
+import proxy09.subject.ISensitiveData;
+import proxy09.subject.MaintenanceHistory;
 
 import java.util.Map;
 import java.util.Set;
