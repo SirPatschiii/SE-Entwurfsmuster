@@ -10,12 +10,12 @@ import bridge04.planner.PassengerFlightPlanner;
 import builder02.EPlaneType;
 import builder02.FlightPlan;
 import builder02.FlightSchedule;
+import chainOfResponsibility11.Flight;
 import chainOfResponsibility11.ManagerApprovalHandler;
 import chainOfResponsibility11.ResourceCheckHandler;
 import chainOfResponsibility11.WeatherCheckHandler;
 import composite05.WaypointIntersection;
 import composite05.WaypointStreet;
-import chainOfResponsibility11.Flight;
 import facade07.ERouteStatus;
 import facade07.FlightPlannerFacade;
 import guard21.check.CrewCheck;
@@ -71,8 +71,6 @@ public class Application {
                 .build();
         log.info(flightPlan.toString());
 
-
-
         WeatherCheckHandler weatherCheck = new WeatherCheckHandler();
         ResourceCheckHandler resourceCheck = new ResourceCheckHandler();
         ManagerApprovalHandler managerApproval = new ManagerApprovalHandler();
@@ -91,14 +89,14 @@ public class Application {
         // Simulate waiting the delay
         System.out.println("waiting for delay to finish");
 
-        //flight is finally ready
+        // The flight is finally ready
         flight.updateState(flight.getWeatherApprovedState());
 
         // General facade for planning flights
         FlightPlannerFacade planner = new FlightPlannerFacade();
         planner.updateRouteStatus(route, ERouteStatus.ON_TIME);
 
-        //
+        // Plan the flight on the aircraft
         IAircraftFleet passengerAircraft = new PassengerAircraft(planeType);
         FlightPlanner passengerPlanner = new PassengerFlightPlanner(passengerAircraft);
 
