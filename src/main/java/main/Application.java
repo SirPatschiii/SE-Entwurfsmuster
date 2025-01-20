@@ -10,14 +10,14 @@ import bridge04.planner.PassengerFlightPlanner;
 import builder02.EPlaneType;
 import builder02.FlightPlan;
 import builder02.FlightSchedule;
+import chainOfResponsibility11.Flight;
 import chainOfResponsibility11.ManagerApprovalHandler;
 import chainOfResponsibility11.ResourceCheckHandler;
 import chainOfResponsibility11.WeatherCheckHandler;
 import composite05.WaypointIntersection;
 import composite05.WaypointStreet;
-import chainOfResponsibility11.Flight;
-import facade07.subsystem.ERouteStatus;
 import facade07.facade.FlightPlannerFacade;
+import facade07.subsystem.ERouteStatus;
 import guard21.check.CrewCheck;
 import guard21.check.FlugzeugCheck;
 import guard21.check.Guard;
@@ -27,7 +27,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.List;
 
 @Slf4j
-//@SuppressWarnings("all")
+@SuppressWarnings("all")
 public class Application {
     public static void main(String[] args) {
         String origin = "EDDM"; // Munich
@@ -71,8 +71,6 @@ public class Application {
                 .build();
         log.info(flightPlan.toString());
 
-
-
         WeatherCheckHandler weatherCheck = new WeatherCheckHandler();
         ResourceCheckHandler resourceCheck = new ResourceCheckHandler();
         ManagerApprovalHandler managerApproval = new ManagerApprovalHandler();
@@ -91,14 +89,14 @@ public class Application {
         // Simulate waiting the delay
         System.out.println("waiting for delay to finish");
 
-        //flight is finally ready
+        // The flight is finally ready
         flight.updateState(flight.getWeatherApprovedState());
 
         // General facade for planning flights
         FlightPlannerFacade planner = new FlightPlannerFacade();
         planner.updateRouteStatus(route, ERouteStatus.ON_TIME);
 
-        //
+        // Plan the flight in the aircraft
         IAircraftFleet passengerAircraft = new PassengerAircraft(planeType);
         FlightPlanner passengerPlanner = new PassengerFlightPlanner(passengerAircraft);
 
