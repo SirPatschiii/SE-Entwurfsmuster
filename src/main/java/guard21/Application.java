@@ -13,8 +13,7 @@ public class Application {
         // Liste aller Checks
         List<Guard> guards = List.of(
                 new FlugzeugCheck(),
-                new CrewCheck(),
-                new WetterCheck()
+                new CrewCheck()
         );
 
         // Prüft alle Bedingungen
