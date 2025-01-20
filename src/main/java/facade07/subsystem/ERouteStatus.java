@@ -1,4 +1,4 @@
-package facade07;
+package facade07.subsystem;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

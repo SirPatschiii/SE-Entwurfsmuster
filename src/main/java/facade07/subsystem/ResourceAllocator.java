@@ -1,4 +1,4 @@
-package facade07;
+package facade07.subsystem;
 
 import java.util.Collections;
 import java.util.HashMap;
