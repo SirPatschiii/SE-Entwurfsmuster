@@ -1,17 +1,79 @@
 package main;
 
-import chainOfResponsibility11.*;
-import mediator14.*;
-import com.google.inject.Guice;
-import com.google.inject.Injector;
+import adapter03.IWeatherTarget;
+import adapter03.WeatherAdapter;
+import bridge04.aircraft.EAircraftType;
+import bridge04.aircraft.IAircraftFleet;
+import bridge04.aircraft.PassengerAircraft;
+import bridge04.planner.FlightPlanner;
+import bridge04.planner.PassengerFlightPlanner;
+import builder02.EPlaneType;
+import builder02.FlightPlan;
+import builder02.FlightSchedule;
+import chainOfResponsibility11.ManagerApprovalHandler;
+import chainOfResponsibility11.ResourceCheckHandler;
+import chainOfResponsibility11.WeatherCheckHandler;
+import composite05.WaypointIntersection;
+import composite05.WaypointStreet;
+import chainOfResponsibility11.Flight;
+import facade07.ERouteStatus;
+import facade07.FlightPlannerFacade;
+import guard21.check.CrewCheck;
+import guard21.check.FlugzeugCheck;
+import guard21.check.Guard;
+import guard21.model.FlugStatus;
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.List;
 
+@Slf4j
+//@SuppressWarnings("all")
 public class Application {
     public static void main(String[] args) {
+        String origin = "EDDM"; // Munich
+        String destination = "EDDF"; // Frankfurt
+        String route = origin + "-" + destination;
 
-        // 11: Chains of Responsibility
-        // Create handlers
-        /* WeatherCheckHandler weatherCheck = new WeatherCheckHandler();
+        // Define the flight schedule
+        FlightSchedule flightSchedule = new FlightSchedule(origin, destination);
+        // Define the plane type
+        EAircraftType planeType = EAircraftType.AIRBUS_A320;
+
+        // Create waypoints for the flight plan
+        WaypointStreet waypointStreet1 = new WaypointStreet("SID");
+        WaypointStreet waypointStreet2 = new WaypointStreet("Y101");
+        WaypointStreet waypointStreet3 = new WaypointStreet("T161");
+        WaypointStreet waypointStreet4 = new WaypointStreet("STAR");
+
+        waypointStreet1.add(new WaypointIntersection(origin));
+        waypointStreet1.add(new WaypointIntersection("GIVMI"));
+        waypointStreet2.add(new WaypointIntersection("GIVMI"));
+        waypointStreet2.add(new WaypointIntersection("ERNAS"));
+        waypointStreet3.add(new WaypointIntersection("ERNAS"));
+        waypointStreet3.add(new WaypointIntersection("ASPAT"));
+        waypointStreet4.add(new WaypointIntersection("ASPAT"));
+        waypointStreet4.add(new WaypointIntersection(destination));
+
+        // Create the weather forecast for the flight
+        IWeatherTarget weatherAdapter = new WeatherAdapter();
+        String weatherForecast = weatherAdapter.getWeather(destination);
+
+        // Create the flight plan with the given waypoints, weather and the flight schedule
+        FlightPlan flightPlan = new FlightPlan.FlightPlanBuilder(flightSchedule)
+                .planeType(EPlaneType.TWIN_ENGINE)
+                .aircraftType(planeType)
+                .distance(165)
+                .stopovers(waypointStreet1.toString())
+                .stopovers(waypointStreet2.toString())
+                .stopovers(waypointStreet3.toString())
+                .stopovers(waypointStreet4.toString())
+                .weather(weatherForecast)
+                .build();
+        log.info(flightPlan.toString());
+
+
+
+        WeatherCheckHandler weatherCheck = new WeatherCheckHandler();
         ResourceCheckHandler resourceCheck = new ResourceCheckHandler();
         ManagerApprovalHandler managerApproval = new ManagerApprovalHandler();
 
@@ -19,88 +81,52 @@ public class Application {
         weatherCheck.setNextHandler(resourceCheck);
         resourceCheck.setNextHandler(managerApproval);
 
-        // Create a flight request
-        Flight flight = new Flight("LH123", "Berlin", "Pending Approval");
+        // Create flight from flight plan
+        Flight flight = flightPlan.createFlight();
 
         // Start the chain
         System.out.println("Processing flight request:");
-        weatherCheck.handleRequest(flight);
+        weatherCheck.handleRequest(flight); // handles if all checks are passed and the flight is launched
 
-        // Check final status
-        System.out.println("Final status of flight " + flight.getFlightId() + ": " + flight.getStatus()); */
+        // Simulate waiting the delay
+        System.out.println("waiting for delay to finish");
 
+        //flight is finally ready
+        flight.updateState(flight.getWeatherApprovedState());
 
-        // 12: Command
-        /* Flight flight = new Flight("LH123", "Berlin", null);
-        CommandManager manager = new CommandManager();
+        // General facade for planning flights
+        FlightPlannerFacade planner = new FlightPlannerFacade();
+        planner.updateRouteStatus(route, ERouteStatus.ON_TIME);
 
-        // Move the flight to a new destination
-        Command moveCommand = new MoveFlightCommand(flight, "Munich");
-        manager.executeCommand(moveCommand);
+        //
+        IAircraftFleet passengerAircraft = new PassengerAircraft(planeType);
+        FlightPlanner passengerPlanner = new PassengerFlightPlanner(passengerAircraft);
 
-        // Add a stopover
-        Command addStopoverCommand = new AddStopoverCommand(flight, "Frankfurt");
-        manager.executeCommand(addStopoverCommand);
+        passengerPlanner.planFlight(route);
 
-        // Remove the stopover
-        Command removeStopoverCommand = new RemoveStopoverCommand(flight);
-        manager.executeCommand(removeStopoverCommand);
+        // Initialize flight state
+        FlugStatus state = new FlugStatus(true, true);
 
-        // Undo last command (remove stopover)
-        manager.undoLastCommand();
+        // List with all checks
+        List<Guard> guards = List.of(
+                new FlugzeugCheck(),
+                new CrewCheck()
+        );
 
-        // Undo adding the stopover
-        manager.undoLastCommand();
+        // Checks all conditions
+        boolean readyForTakeoff = guards.stream()
+                .allMatch(guard -> guard.check(state));
 
-        // Undo moving the flight
-        manager.undoLastCommand(); */
-
-
-        // 13: Iterator
-        /* FlightCollection flightCollection = new FlightCollection();
-        flightCollection.addFlight(new Flight("LH123", "A1", "Berlin"));
-        flightCollection.addFlight(new Flight("LH124", "A1", "Munich"));
-        flightCollection.addFlight(new Flight("LH125", "B2", "Hamburg"));
-        flightCollection.addFlight(new Flight("LH126", "B3", "Frankfurt"));
-
-        // Iterate over flights using the custom iterator
-        FlightIterator iterator = flightCollection.iterator();
-        System.out.println("Iterating over flights:");
-        while (iterator.hasNext()) {
-            iterator13.Flight flight = iterator.next();
-            System.out.println("Flight ID: " + flight.getFlightId() + ", Gate: " + flight.getGate() + ", Destination: " + flight.getDestination());
+        // Shows results
+        if (readyForTakeoff) {
+            System.out.println("Flight approved!");
+            flight.updateState(flight.getInTheAirState());
+        } else {
+            System.out.println("Flight not approved!");
         }
 
-        // Detect conflicts
-        ConflictDetector conflictDetector = new ConflictDetector();
-        List<Conflict> conflicts = conflictDetector.detectConflicts(flightCollection);
+        System.out.println("Flying . . .");
 
-        System.out.println("\nConflicts detected:");
-        for (Conflict conflict : conflicts) {
-            System.out.println("Conflict Type: " + conflict.getType() + ", Flights: " + conflict.getFlight1().getFlightId() + " and " + conflict.getFlight2().getFlightId());
-        } */
-
-
-        // 14: Mediator
-        /* FlightMediator mediator = new FlightMediator();
-
-        FlightPlanning flightPlanning = new FlightPlanning(mediator);
-        CrewManagement crewManagement = new CrewManagement(mediator);
-        Maintenance maintenance = new Maintenance(mediator);
-
-        mediator.setFlightPlanning(flightPlanning);
-        mediator.setCrewManagement(crewManagement);
-        mediator.setMaintenance(maintenance);
-
-        Flight flight = new Flight("LH123", "Scheduled");
-
-        // Schedule a flight
-        flightPlanning.scheduleFlight(flight);
-
-        // Complete maintenance for the flight
-        maintenance.completeMaintenance(flight);
-
-        // Cancel the flight
-        flightPlanning.cancelFlight(flight); */
+        flight.updateState(flight.getLandedState());
     }
 }

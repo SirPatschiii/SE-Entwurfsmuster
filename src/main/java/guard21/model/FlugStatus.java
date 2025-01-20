@@ -10,5 +10,4 @@ import lombok.ToString;
 public class FlugStatus {
     private final boolean flugzeugBereit; // Flugzeug bereit?
     private final boolean crewBereit;     // Crew bereit?
-    private final boolean wetterOK;       // Wetterbedingungen okay?
 }

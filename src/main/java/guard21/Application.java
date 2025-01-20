@@ -8,7 +8,7 @@ import java.util.List;
 public class Application {
     public static void main(String[] args) {
         // Flugstatus mit allen Bedingungen
-        FlugStatus status = new FlugStatus(true, true, false); // Wetter schlecht
+        FlugStatus status = new FlugStatus(true, true);
 
         // Liste aller Checks
         List<Guard> guards = List.of(
