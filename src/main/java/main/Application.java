@@ -69,7 +69,7 @@ public class Application {
                 .stopovers(waypointStreet4.toString())
                 .weather(weatherForecast)
                 .build();
-        log.info(flightPlan.toString());
+        System.out.println(flightPlan.toString());
 
         WeatherCheckHandler weatherCheck = new WeatherCheckHandler();
         ResourceCheckHandler resourceCheck = new ResourceCheckHandler();
