@@ -1,5 +1,6 @@
-package bridge04;
+package bridge04.planner;
 
+import bridge04.aircraft.IAircraftFleet;
 import lombok.AllArgsConstructor;
 
 // Decoupling with abstraction: FlightPlanner

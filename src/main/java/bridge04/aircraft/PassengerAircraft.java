@@ -1,4 +1,4 @@
-package bridge04;
+package bridge04.aircraft;
 
 import lombok.AllArgsConstructor;
 import lombok.ToString;

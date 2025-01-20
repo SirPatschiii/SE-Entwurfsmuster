@@ -1,4 +1,4 @@
-package bridge04;
+package bridge04.aircraft;
 
 // Implementor
 // It defines the operations that the concrete implementations must provide.

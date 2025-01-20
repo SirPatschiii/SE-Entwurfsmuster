@@ -1,4 +1,6 @@
-package bridge04;
+package bridge04.planner;
+
+import bridge04.aircraft.IAircraftFleet;
 
 // Provides a specialized implementation for the abstraction
 public class PassengerFlightPlanner extends FlightPlanner {
