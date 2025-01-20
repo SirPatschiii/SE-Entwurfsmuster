@@ -25,7 +25,7 @@ public class Flight {
         if (state.canTransitionTo(newState)) {
             System.out.println("Transitioning flight " + flightNumber + " from " + state.getDescription() + " to " + newState.getDescription());
             state = newState;
-            state.handleStateChange(this);
+            //state.handleStateChange();
         } else {
             System.out.println("Invalid transition from " + state.getDescription() + " to " + newState.getDescription() + " for flight " + flightNumber);
         }

@@ -1,6 +1,6 @@
 package state17.state;
 
-import state17.Flight.Flight;
+import chainOfResponsibility11.Flight;
 
 /**
  * The DelayedState represents a flight that has been postponed due to unforeseen circumstances.
@@ -13,11 +13,11 @@ public class DelayedState extends FlightState {
 
     @Override
     public boolean canTransitionTo(FlightState newState) {
-        return newState instanceof ScheduledState || newState instanceof InTheAirState;
+        return newState instanceof ScheduledState || newState instanceof WeatherApprovedState;
     }
 
     @Override
     public void handleStateChange(Flight flight) {
-        System.out.println("Flight " + flight.getFlightNumber() + " is delayed. Gate remains available.");
+        System.out.println("Flight is delayed. Gate remains available.");
     }
 }

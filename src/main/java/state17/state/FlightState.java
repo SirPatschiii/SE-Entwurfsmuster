@@ -1,6 +1,7 @@
 package state17.state;
 
-import state17.Flight.Flight;
+
+import chainOfResponsibility11.Flight;
 
 public abstract class FlightState { // Abstract state class that all concrete states inherit from
     private final String description;

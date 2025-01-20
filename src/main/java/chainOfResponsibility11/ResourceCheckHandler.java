@@ -1,6 +1,6 @@
 package chainOfResponsibility11;
 
-class ResourceCheckHandler extends FlightRequestHandler {
+public class ResourceCheckHandler extends FlightRequestHandler {
     @Override
     protected boolean canHandle(Flight flight) {
         // Simulate resource availability check

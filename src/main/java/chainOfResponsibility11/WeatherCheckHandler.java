@@ -1,11 +1,21 @@
 package chainOfResponsibility11;
 
+import state17.state.DelayedState;
+
 // Concrete Handlers
 public class WeatherCheckHandler extends FlightRequestHandler {
+    private String currentWeather;
     @Override
     protected boolean canHandle(Flight flight) {
         // Simulate a weather check condition
-        return true; // Always passes for simplicity
+        if (currentWeather == "SUNNY") {
+            // state stays in scheduled
+            return true;
+        }
+        else {
+            flight.updateState(flight.getDelayedState());
+            return false;
+        }
     }
 
     @Override

@@ -1,6 +1,6 @@
 package state17.state;
 
-import state17.Flight.Flight;
+import chainOfResponsibility11.Flight;
 
 /**
  * The LandedState represents a flight that has completed its journey and landed.
@@ -18,6 +18,6 @@ public class LandedState extends FlightState { // added optional so it makes mor
 
     @Override
     public void handleStateChange(Flight flight) {
-        System.out.println("Flight " + flight.getFlightNumber() + " has landed. Passengers can now disembark.");
+        System.out.println("Flight has landed. Passengers can now disembark.");
     }
 }

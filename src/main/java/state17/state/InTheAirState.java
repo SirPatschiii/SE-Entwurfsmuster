@@ -1,6 +1,6 @@
 package state17.state;
 
-import state17.Flight.Flight;
+import chainOfResponsibility11.Flight;
 
 /**
  * The InTheAirState represents a flight that is currently in transit.
@@ -18,6 +18,6 @@ public class InTheAirState extends FlightState {
 
     @Override
     public void handleStateChange(Flight flight) {
-        System.out.println("Flight " + flight.getFlightNumber() + " is now in the air.");
+        System.out.println("Flight is now in the air.");
     }
 }

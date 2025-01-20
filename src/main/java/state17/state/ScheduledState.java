@@ -1,6 +1,6 @@
 package state17.state;
 
-import state17.Flight.Flight;
+import chainOfResponsibility11.Flight;
 
 /**
  * The ScheduledState represents a flight that is planned but has not yet taken off.
@@ -17,7 +17,7 @@ public class ScheduledState extends FlightState {
      */
     @Override
     public boolean canTransitionTo(FlightState newState) {
-        return newState instanceof DelayedState || newState instanceof InTheAirState;
+        return newState instanceof DelayedState || newState instanceof WeatherApprovedState;
     }
 
     /**
@@ -25,6 +25,6 @@ public class ScheduledState extends FlightState {
      */
     @Override
     public void handleStateChange(Flight flight) {
-        System.out.println("Flight " + flight.getFlightNumber() + " is now scheduled and waiting at the gate.");
+        System.out.println("Flight is now scheduled and waiting at the gate.");
     }
 }
