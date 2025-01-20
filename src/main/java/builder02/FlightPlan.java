@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.ToString;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Represents a flight plan, which includes details about the flight schedule,
@@ -15,7 +16,6 @@ import java.util.ArrayList;
  * </p>
  */
 @Getter
-@ToString
 @SuppressWarnings("all")
 public class FlightPlan {
     /**
@@ -34,6 +34,16 @@ public class FlightPlan {
     private final int distance;
 
     /**
+     * The weather for the flight.
+     */
+    private final String weather;
+
+    /**
+     * The aircraft type of the flight.
+     */
+    private final EAircraftType aircraftType;
+
+    /**
      * The list of stopovers for the flight.
      */
     private final ArrayList<String> stopovers;
@@ -47,7 +57,30 @@ public class FlightPlan {
         this.flightSchedule = builder.flightSchedule;
         this.planeType = builder.planeType;
         this.distance = builder.distance;
+        this.weather = builder.weather;
+        this.aircraftType = builder.aircraftType;
         this.stopovers = builder.stopovers;
+    }
+
+    /**
+     * Creates a {@link Flight} from the given attributes of the class.
+     *
+     * @return the flight create from the attributes of {@link FlightPlan}
+     */
+    public Flight createFlight() {
+        Random r = new Random();
+        return new Flight(String.valueOf(r.nextInt()), flightSchedule.getDestination());
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("A flight from " + flightSchedule.getOrigin() + " to " + flightSchedule.getDestination() + "\n");
+        sb.append("Distance: " + distance + "nm\n");
+        sb.append("Weather: " + weather + "\n");
+        sb.append("Aircraft Type: " + aircraftType + "\n");
+        sb.append("Stopovers: " + stopovers + "\n");
+        return sb.toString();
     }
 
     /**
@@ -73,6 +106,16 @@ public class FlightPlan {
          * The distance of the flight in kilometers (optional parameter).
          */
         private int distance;
+
+        /**
+         * The weather of the flight (optional parameter).
+         */
+        private String weather;
+
+        /**
+         * The aircraft type of the flight (optional parameter)
+         */
+        private EAircraftType aircraftType;
 
         /**
          * The list of stopovers for the flight (optional parameter).
@@ -107,6 +150,28 @@ public class FlightPlan {
          */
         public FlightPlanBuilder distance(int distance) {
             this.distance = distance;
+            return this;
+        }
+
+        /**
+         * Sets the weather of the flight plan.
+         *
+         * @param weather the weather for the flight
+         * @return the current instance of {@link FlightPlanBuilder}
+         */
+        public FlightPlanBuilder weather(String weather) {
+            this.weather = weather;
+            return this;
+        }
+
+        /**
+         * Sets the aircraft type for the flight.
+         *
+         * @param aircraftType the aircraft type for the flight
+         * @return the current instance of {@link FlightPlanBuilder}
+         */
+        public FlightPlanBuilder aircraftType(EAircraftType aircraftType) {
+            this.aircraftType = aircraftType;
             return this;
         }
 

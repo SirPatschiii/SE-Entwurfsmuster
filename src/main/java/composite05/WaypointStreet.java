@@ -49,4 +49,9 @@ public class WaypointStreet extends Waypoint {
             waypoint.clearSection();
         }
     }
+    
+    @Override
+    public String toString() {
+        return waypoints.getFirst().toString() + " via " + name + " to " + waypoints.getLast().toString();
+    }
 }

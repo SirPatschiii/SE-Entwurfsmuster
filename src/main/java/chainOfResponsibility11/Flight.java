@@ -6,8 +6,7 @@ import state17.state.*;
 // Flight class
 @Getter
 @Setter
-@AllArgsConstructor
-class Flight {
+public class Flight {
     private String flightId;
     private String destination;
     private FlightState delayedState;

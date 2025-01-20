@@ -45,4 +45,9 @@ public class WaypointIntersection extends Waypoint {
     public void clearSection() {
         log.info("Cleared section in WaypointIntersection : {}", name);
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }
