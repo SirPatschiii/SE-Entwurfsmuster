@@ -1,6 +1,6 @@
 package state17.state;
 
-import chainOfResponsibility11.Flight;
+import chainOfResponsibility11.shared.Flight;
 
 /**
  * The ScheduledState represents a flight that is planned but has not yet taken off.

@@ -1,6 +1,6 @@
 package state17.state;
 
-import chainOfResponsibility11.Flight;
+import chainOfResponsibility11.shared.Flight;
 
 /**
  * The DelayedState represents a flight that has been postponed due to unforeseen circumstances.

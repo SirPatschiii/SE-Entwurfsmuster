@@ -1,5 +1,6 @@
-package iterator13;
+package iterator13.conflict;
 
+import iterator13.shared.Flight;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

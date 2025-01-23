@@ -1,6 +1,6 @@
 package state17.state;
 
-import chainOfResponsibility11.Flight;
+import chainOfResponsibility11.shared.Flight;
 
 /**
  * The InTheAirState represents a flight that is currently in transit.

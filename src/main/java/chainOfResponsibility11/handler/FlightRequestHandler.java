@@ -1,4 +1,6 @@
-package chainOfResponsibility11;
+package chainOfResponsibility11.handler;
+
+import chainOfResponsibility11.shared.Flight;
 
 // Abstract Handler class
 public abstract class FlightRequestHandler {

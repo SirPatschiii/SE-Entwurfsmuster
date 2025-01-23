@@ -1,7 +1,7 @@
 package builder02;
 
 import bridge04.aircraft.EAircraftType;
-import chainOfResponsibility11.Flight;
+import chainOfResponsibility11.shared.Flight;
 import lombok.Getter;
 
 import java.util.ArrayList;

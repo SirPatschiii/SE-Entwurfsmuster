@@ -1,4 +1,6 @@
-package iterator13;
+package iterator13.shared;
+
+import iterator13.iterator.FlightIterator;
 
 import java.util.ArrayList;
 import java.util.List;

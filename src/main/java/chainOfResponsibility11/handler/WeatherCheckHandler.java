@@ -1,6 +1,6 @@
-package chainOfResponsibility11;
+package chainOfResponsibility11.handler;
 
-import state17.state.DelayedState;
+import chainOfResponsibility11.shared.Flight;
 
 // Concrete Handlers
 public class WeatherCheckHandler extends FlightRequestHandler {

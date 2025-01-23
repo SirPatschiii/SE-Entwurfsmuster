@@ -1,4 +1,6 @@
-package chainOfResponsibility11;
+package chainOfResponsibility11.handler;
+
+import chainOfResponsibility11.shared.Flight;
 
 public class ResourceCheckHandler extends FlightRequestHandler {
     @Override

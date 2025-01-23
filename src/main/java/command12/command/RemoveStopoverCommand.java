@@ -1,4 +1,6 @@
-package command12;
+package command12.command;
+
+import command12.shared.Flight;
 
 // Command to remove a stopover
 public class RemoveStopoverCommand extends Command {

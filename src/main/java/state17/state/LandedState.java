@@ -1,6 +1,6 @@
 package state17.state;
 
-import chainOfResponsibility11.Flight;
+import chainOfResponsibility11.shared.Flight;
 
 /**
  * The LandedState represents a flight that has completed its journey and landed.

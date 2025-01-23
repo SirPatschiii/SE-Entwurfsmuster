@@ -1,5 +1,6 @@
-package chainOfResponsibility11;
+package chainOfResponsibility11.handler;
 
+import chainOfResponsibility11.shared.Flight;
 import state17.state.ScheduledState;
 
 public class ManagerApprovalHandler extends FlightRequestHandler {

@@ -1,4 +1,4 @@
-package command12;
+package command12.shared;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

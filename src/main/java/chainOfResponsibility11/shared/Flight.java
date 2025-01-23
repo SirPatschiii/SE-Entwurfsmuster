@@ -1,4 +1,4 @@
-package chainOfResponsibility11;
+package chainOfResponsibility11.shared;
 
 import lombok.*;
 import state17.state.*;

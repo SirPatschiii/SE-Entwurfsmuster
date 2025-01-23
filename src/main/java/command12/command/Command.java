@@ -1,6 +1,6 @@
-package command12;
+package command12.command;
 
-import java.util.Stack;
+import command12.shared.Flight;
 
 // Abstract Command class
 public abstract class Command {

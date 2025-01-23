@@ -1,4 +1,6 @@
-package command12;
+package command12.command;
+
+import command12.shared.Flight;
 
 // Command to move a flight
 public class MoveFlightCommand extends Command {
